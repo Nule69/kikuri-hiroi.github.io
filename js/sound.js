@@ -1,32 +1,32 @@
 var EATING_SOUND = new buzz.sound([
-    "./sound/eating.mp3" 
+    "./eating.mp3" 
 ]);
 var GHOST_EATEN_SOUND = new buzz.sound([
-	"./sound/ghost-eaten.mp3" 
+	"./ghost-eaten.mp3" 
 ]);
 var EXTRA_LIFE_SOUND = new buzz.sound([
-    "./sound/extra-life.mp3" 
+    "./extra-life.mp3" 
 ]);
 var EAT_PILL_SOUND = new buzz.sound([
-    "./sound/eat-pill.mp3" 
+    "./eat-pill.mp3" 
 ]);
 var EAT_FRUIT_SOUND = new buzz.sound([
-    "./sound/eat-fruit.mp3" 
+    "./eat-fruit.mp3" 
 ]);
 var EAT_GHOST_SOUND = new buzz.sound([
-    "./sound/eat-ghost.mp3" 
+    "./eat-ghost.mp3" 
 ]);
 var SIREN_SOUND = new buzz.sound([
-    "./sound/siren.mp3" 
+    "./siren.mp3" 
 ]);
 var WAZA_SOUND = new buzz.sound([
-    "./sound/waza.mp3" 
+    "./waza.mp3" 
 ]);
 var READY_SOUND = new buzz.sound([
-    "./sound/ready.mp3" 
+    "./ready.mp3" 
 ]);
 var DIE_SOUND = new buzz.sound([
-    "./sound/die.mp3" 
+    "./die.mp3" 
 ]);
 
 var GROUP_SOUND = new buzz.group( [ EATING_SOUND, SIREN_SOUND, EAT_PILL_SOUND, EAT_GHOST_SOUND, READY_SOUND, DIE_SOUND, WAZA_SOUND, GHOST_EATEN_SOUND, EXTRA_LIFE_SOUND, EAT_FRUIT_SOUND ] );
