@@ -136,7 +136,7 @@ span.combo, span.fruits {
 	margin: auto;
 	left: 0px;
 	right: 0px;
-	bottom: -145px;
+	bottom: -1000px;  /* ← ESTE ES EL VALOR QUE TIENES QUE CAMBIAR */
 	width: 550px;
 	height: 140px;
 	background-color: #666;
@@ -197,31 +197,31 @@ span.combo, span.fruits {
 	z-index: 999999;
 }
 #control-up-big { 
-	bottom: 10px;
-	left: 0px;
-	right: 0px;
-	width: 125px;
-	height: 125px;
-	background-image: url('../img/move-up-big.png');
-}
-#control-down-big { 
 	bottom: -120px;
 	left: 0px;
 	right: 0px;
 	width: 125px;
-	height: 125px;
+	height: 175px;
+	background-image: url('../img/move-up-big.png');
+}
+#control-down-big { 
+	bottom: -260px;
+	left: 0px;
+	right: 0px;
+	width: 125px;
+	height: 175px;
 	background-image: url('../img/move-down-big.png');
 }
 #control-left-big { 
 	left: 80px;
-	bottom: -90px;
+	bottom: -190px;
 	width: 125px;
 	height: 175px;
 	background-image: url('../img/move-left-big.png');
 }
 #control-right-big { 
 	right: 80px;
-	bottom: -90px;
+	bottom: -190px;
 	width: 125px;
 	height: 175px;
 	background-image: url('../img/move-right-big.png');
@@ -393,6 +393,9 @@ h3 {
 	#home .help-button, #panel .help-button, #home .github, #sound, .sound { 
 		display: none;
 	}
+	#sound, .sound {
+    display: block;
+}
 	h1, #canvas-panel-title-pacman { 
 		visibility: hidden;
 	}
