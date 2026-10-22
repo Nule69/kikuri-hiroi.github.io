@@ -436,3 +436,16 @@ h3 {
 		top: 347px;
 	}
 }
+@media screen and (max-width: 1024px) {
+    #sound,
+    .sound {
+        display: block !important;
+    }
+}
+
+@media screen and (max-height: 640px) {
+    #sound,
+    .sound {
+        display: block !important;
+    }
+}
