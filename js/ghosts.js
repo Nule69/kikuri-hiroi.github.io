@@ -136,25 +136,125 @@ function drawGhosts() {
 	drawGhost('inky');
 	drawGhost("clyde");
 }
-function drawGhost(ghost) { 
 
-	var ctx = getGhostCanevasContext(ghost);
-	
-	if (eval('GHOST_' + ghost.toUpperCase() + '_STATE === 0')) { 
-		eval('ctx.fillStyle = GHOST_' + ghost.toUpperCase() + '_COLOR');
-	} else { 
-		if (eval('GHOST_' + ghost.toUpperCase() + '_AFFRAID_STATE === 1')) { 
-			eval('ctx.fillStyle = GHOST_AFFRAID_FINISH_COLOR');
-		} else { 
-			eval('ctx.fillStyle = GHOST_AFFRAID_COLOR');
-		}
-	}
-	eval('drawHelperGhost(ctx, GHOST_' + ghost.toUpperCase() + '_POSITION_X, GHOST_' + ghost.toUpperCase() + '_POSITION_Y, GHOST_' + ghost.toUpperCase() + '_DIRECTION, GHOST_' + ghost.toUpperCase() + '_BODY_STATE, GHOST_' + ghost.toUpperCase() + '_STATE, GHOST_' + ghost.toUpperCase() + '_AFFRAID_STATE)');
-	
-	ctx.closePath();
-	
-	
+function drawGhost(ghost) {
+    var ctx = getGhostCanevasContext(ghost);
+
+    if (eval('GHOST_' + ghost.toUpperCase() + '_STATE === 0')) {
+        eval('ctx.fillStyle = GHOST_' + ghost.toUpperCase() + '_COLOR');
+    } else {
+        if (eval('GHOST_' + ghost.toUpperCase() + '_AFFRAID_STATE === 1')) {
+            eval('ctx.fillStyle = GHOST_AFFRAID_FINISH_COLOR');
+        } else {
+            eval('ctx.fillStyle = GHOST_AFFRAID_COLOR');
+        }
+    }
+
+    drawHelperGhost(
+    ctx,
+    eval('GHOST_' + ghost.toUpperCase() + '_POSITION_X'),
+    eval('GHOST_' + ghost.toUpperCase() + '_POSITION_Y'),
+    eval('GHOST_' + ghost.toUpperCase() + '_DIRECTION'),
+    eval('GHOST_' + ghost.toUpperCase() + '_BODY_STATE'),
+    eval('GHOST_' + ghost.toUpperCase() + '_STATE'),
+    eval('GHOST_' + ghost.toUpperCase() + '_AFFRAID_STATE'),
+    ghost
+);
+
+    // Accesorio del fantasma amarillo: Clyde
+    if (ghost === "clyde") {
+        var x = GHOST_CLYDE_POSITION_X;
+        var y = GHOST_CLYDE_POSITION_Y;
+
+        if (GHOST_CLYDE_STATE !== -1) {
+            ctx.save();
+            ctx.beginPath();
+            ctx.moveTo(x, y - 21);
+            ctx.lineTo(x - 5, y - 29);
+            ctx.lineTo(x + 5, y - 29);
+            ctx.closePath();
+
+            ctx.fillStyle = "#fde400";
+            ctx.fill();
+            ctx.restore();
+        }
+    }
+	//lagrimas del fantasma rosa
+	if (ghost === "pinky") {
+    var x = GHOST_PINKY_POSITION_X;
+    var y = GHOST_PINKY_POSITION_Y;
+
+    ctx.save();
+    ctx.fillStyle = "#55dfff";
+
+    ctx.beginPath();
+    ctx.arc(x - 7, y + 5, 1.8, 0, Math.PI * 2);
+    ctx.arc(x + 7, y + 5, 1.8, 0, Math.PI * 2);
+    ctx.fill();
+
+    ctx.restore();
 }
+
+    // Mechón del fantasma rojo: Blinky
+  
+    // Mechón lateral del fantasma rojo
+//    if (ghost === "blinky") {
+  //      var x = GHOST_BLINKY_POSITION_X;
+    //    var y = GHOST_BLINKY_POSITION_Y;
+
+//        if (GHOST_BLINKY_STATE !== -1) {
+  //          ctx.save();
+    //        ctx.beginPath();
+
+            // Nace arriba, hacia un costado, y cae por la cabeza
+      //      ctx.moveTo(x + 3, y - 18);
+        //    ctx.quadraticCurveTo(x + 12, y - 25, x + 13, y - 17);
+          //  ctx.lineTo(x + 14, y - 8);
+        //    ctx.quadraticCurveTo(x + 13, y - 3, x + 8, y - 5);
+          //  ctx.lineTo(x + 7, y - 12);
+        //    ctx.quadraticCurveTo(x + 5, y - 15, x + 3, y - 18);
+
+           // ctx.closePath();
+           // ctx.fillStyle = "#ff0000";
+           // ctx.fill();
+
+           // ctx.restore();
+        //}
+   // }
+	//esto es del fantasma color rosa
+	
+    // Mechón levantado del fantasma rosa: Pinky
+    //if (ghost === "pinky") {
+      //  var x = GHOST_PINKY_POSITION_X;
+       // var y = GHOST_PINKY_POSITION_Y;
+
+       // if (GHOST_PINKY_STATE !== -1) {
+         //   ctx.save();
+          //  ctx.beginPath();
+
+            // Mechón puntiagudo que nace entre los dos adornos
+  //          ctx.moveTo(x - 2, y - 17);
+    //        ctx.quadraticCurveTo(x - 4, y - 25, x, y - 30);
+    //        ctx.quadraticCurveTo(x + 1, y - 25, x + 5, y - 23);
+     //       ctx.lineTo(x + 3, y - 17);
+
+      //      ctx.closePath();
+     //       ctx.fillStyle = "#ff80ab";
+    //        ctx.fill();
+
+        //    ctx.restore();
+       // }
+   // }
+
+
+
+    ctx.closePath();
+}
+
+
+
+
+
 
 function affraidGhosts() { 
 	
@@ -469,11 +569,15 @@ function reverseDirection(direction) {
 	else return direction + 2;
 }
 
+
+
+
+
 function eraseGhost(ghost) { 
 
 	var ctx = getGhostCanevasContext(ghost);
 	
-	eval('ctx.clearRect(GHOST_' + ghost.toUpperCase() + '_POSITION_X - 24, GHOST_' + ghost.toUpperCase() + '_POSITION_Y - 24, 48, 48)');
+	eval('ctx.clearRect(GHOST_' + ghost.toUpperCase() + '_POSITION_X - 32, GHOST_' + ghost.toUpperCase() + '_POSITION_Y - 32, 64, 64)');
 }
 function eraseGhosts() { 
 
@@ -594,7 +698,7 @@ function resumeGhosts() {
 	resumeGhost('clyde');
 }
 
-function drawHelperGhost(ctx, x, y, d, b, s, a) {
+function drawHelperGhost(ctx, x, y, d, b, s, a, ghost) {
 	/*
 	 * Apariencia nueva: fantasma caricaturesco, cuerpo redondeado,
 	 * borde blanco y sombra oscura. Se mantienen los argumentos y
@@ -641,6 +745,9 @@ function drawHelperGhost(ctx, x, y, d, b, s, a) {
 		ctx.stroke();
 		ctx.restore();
 
+
+
+
 		// Color base asignado por drawGhost().
 		ctx.fill();
 		ctx.lineWidth = 2.2;
@@ -674,41 +781,64 @@ function drawHelperGhost(ctx, x, y, d, b, s, a) {
 		ctx.lineTo(x + 4, y + 7);
 		ctx.lineTo(x + 7, y + 4);
 		ctx.stroke();
-	} else {
-		// Ojos expresivos entrecerrados, inspirados en la segunda imagen.
-		var lookX = 0;
-		var lookY = 0;
-		if (d === 1) lookX = 1.5;
-		else if (d === 3) lookX = -1.5;
-		else if (d === 2) lookY = 1.5;
-		else if (d === 4) lookY = -1.5;
+	
+    
+    } else if (ghost === "inky") {
+        // Ojos blancos, simétricos y con mirada despectiva.
+        ctx.fillStyle = "#ffffff";
+        ctx.beginPath();
 
-		ctx.strokeStyle = "#301b1b";
-		ctx.fillStyle = "#301b1b";
-		ctx.lineWidth = 2.8;
+        // Ojo izquierdo.
+        ctx.moveTo(x - 12, y - 5);
+        ctx.lineTo(x - 3, y - 5);
+        ctx.quadraticCurveTo(x - 3, y + 2, x - 7.5, y + 2);
+        ctx.quadraticCurveTo(x - 12, y + 2, x - 12, y - 5);
 
-		// Ojo izquierdo en forma de ceja/chevrón.
-		ctx.beginPath();
-		ctx.moveTo(x - 11 + lookX, y - 6 + lookY);
-		ctx.lineTo(x - 4 + lookX, y - 4 + lookY);
-		ctx.lineTo(x - 10 + lookX, y + 1 + lookY);
-		ctx.stroke();
+        // Ojo derecho, mismo tamaño.
+        ctx.moveTo(x + 3, y - 5);
+        ctx.lineTo(x + 12, y - 5);
+        ctx.quadraticCurveTo(x + 12, y + 2, x + 7.5, y + 2);
+        ctx.quadraticCurveTo(x + 3, y + 2, x + 3, y - 5);
 
-		// Ojo derecho, reflejado.
-		ctx.beginPath();
-		ctx.moveTo(x + 11 + lookX, y - 6 + lookY);
-		ctx.lineTo(x + 4 + lookX, y - 4 + lookY);
-		ctx.lineTo(x + 10 + lookX, y + 1 + lookY);
-		ctx.stroke();
+   
+        ctx.fill();
 
-		// Pequeño gesto en la mejilla, como en la referencia.
-		ctx.beginPath();
-		ctx.moveTo(x - 10, y + 4);
-		ctx.lineTo(x - 7, y + 7);
-		ctx.lineTo(x - 4, y + 5);
-		ctx.lineWidth = 2.1;
-		ctx.stroke();
-	}
+    } else {
+        // Caras originales de los demás fantasmas.
+        var lookX = 0;
+        var lookY = 0;
 
-	ctx.restore();
+        if (d === 1) lookX = 1.5;
+        else if (d === 3) lookX = -1.5;
+        else if (d === 2) lookY = 1.5;
+        else if (d === 4) lookY = -1.5;
+
+        ctx.strokeStyle = "#301b1b";
+        ctx.fillStyle = "#301b1b";
+        ctx.lineWidth = 2.8;
+
+        // Ojo izquierdo.
+        ctx.beginPath();
+        ctx.moveTo(x - 11 + lookX, y - 6 + lookY);
+        ctx.lineTo(x - 4 + lookX, y - 4 + lookY);
+        ctx.lineTo(x - 10 + lookX, y + 1 + lookY);
+        ctx.stroke();
+
+        // Ojo derecho.
+        ctx.beginPath();
+        ctx.moveTo(x + 11 + lookX, y - 6 + lookY);
+        ctx.lineTo(x + 4 + lookX, y - 4 + lookY);
+        ctx.lineTo(x + 10 + lookX, y + 1 + lookY);
+        ctx.stroke();
+
+        // Pequeño gesto en la mejilla.
+        ctx.beginPath();
+        ctx.moveTo(x - 10, y + 4);
+        ctx.lineTo(x - 7, y + 7);
+        ctx.lineTo(x - 4, y + 5);
+        ctx.lineWidth = 2.1;
+        ctx.stroke();
+    }
+
+    ctx.restore();
 }
